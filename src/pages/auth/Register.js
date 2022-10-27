@@ -17,14 +17,11 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/register`,
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post(`/register`, {
+        name,
+        email,
+        password,
+      });
       console.log(data);
       if (data?.error) {
         toast.error(data.error);
@@ -32,7 +29,7 @@ export default function Register() {
         localStorage.setItem('auth', JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
         toast.success('Registration successful');
-        navigate('/');
+        navigate('/dashboard');
       }
     } catch (err) {
       console.log(err);

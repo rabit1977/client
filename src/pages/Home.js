@@ -5,7 +5,7 @@ export default function Home() {
   const [auth, setAuth] = useAuth();
   return (
     <div>
-      <Showcase title='Hello React'></Showcase>;
+      <Showcase title='Hello React Home'></Showcase>;
       <pre>{JSON.stringify(auth, null, 4)}</pre>
     </div>
   );

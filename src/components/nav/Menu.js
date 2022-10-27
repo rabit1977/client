@@ -24,16 +24,28 @@ export default function Menu() {
             HOME
           </NavLink>
         </li>
-        <li className='nav-item'>
-          <NavLink to='/login' className=''>
-            LOGIN
-          </NavLink>
-        </li>
-        <li className=''>
-          <NavLink className='' to='/register'>
-            REGISTER
-          </NavLink>
-        </li>
+
+        {!auth?.user ? (
+          <>
+            {' '}
+            <li className='nav-item'>
+              <NavLink to='/login' className=''>
+                LOGIN
+              </NavLink>
+            </li>
+            <li className=''>
+              <NavLink className='' to='/register'>
+                REGISTER
+              </NavLink>
+            </li>
+          </>
+        ) : (
+          <li className=' cursor-pointer'>
+            <a onClick={logout} className='nav-link'>
+              LOGOUT
+            </a>
+          </li>
+        )}
       </ul>
     </>
   );

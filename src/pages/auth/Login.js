@@ -3,35 +3,36 @@ import Showcase from '../../components/cards/Showcase';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../context/auth';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 export default function Login() {
   // state
-  const [email, setEmail] = useState('andi@gmail.com');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("andi@gmail.com");
+  const [password, setPassword] = useState("");
   // hook
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`${process.env.REACT_APP_API}/login`, {
+      const { data } = await axios.post(`/login`, {
         email,
         password,
       });
-      console.log(data);
+      // console.log(data);
       if (data?.error) {
         toast.error(data.error);
       } else {
-        localStorage.setItem('auth', JSON.stringify(data));
+        localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
-        toast.success('Login successful');
-        navigate('/');
+        toast.success("Login successful");
+        navigate(location.state || "/dashboard");
       }
     } catch (err) {
       console.log(err);
-      toast.error('Login failed. Try again.');
+      toast.error("Login failed. Try again.");
     }
   };
 
@@ -68,7 +69,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <pre>{JSON.stringify(email, null, 4)}</pre>
     </div>
   );
 }
