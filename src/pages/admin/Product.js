@@ -3,28 +3,23 @@ import Showcase from '../../components/cards/Showcase';
 import AdminMenu from '../../components/nav/AdminMenu';
 import { useAuth } from '../../context/auth';
 
-export default function AdminDashboard() {
+export default function AdminProduct() {
   const [auth, setAuth] = useAuth();
-
   return (
     <>
       <Showcase
         title={`Hello ${auth?.user?.name}`}
         subTitle='Admin Dashboard'
-      ></Showcase>
+      />
       <div>
         <div>
           <div>
             <AdminMenu />
           </div>
           <div>
-            <div>Admin Information</div>
+            <div>Create Products</div>
+            <p>Create products from...</p>
           </div>
-          <ul>
-            <li>{auth?.user?.name}</li>
-            <li>{auth?.user?.email}</li>
-            <li>Admin</li>
-          </ul>
         </div>
       </div>
     </>
